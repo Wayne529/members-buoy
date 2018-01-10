@@ -1,0 +1,371 @@
+@charset "utf-8";
+
+//重置样式
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+textarea,
+p,
+th,
+td,
+input,
+select,
+textarea,
+button {
+    margin: 0;
+    padding: 0;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: inherit;
+    color: inherit;
+}
+
+
+ul,
+ol {
+    list-style: none;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+/*A标签链接*/
+a {
+    text-decoration: none;
+    background-color: transparent;
+    outline: none;
+    color: #333;
+    cursor: pointer;    
+}
+
+a:active,
+a:hover,
+a:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+b,
+strong {
+    font-weight: inherit;
+}
+
+
+/* 图片默认样式 */
+img {
+    display: inline-block;
+    border: none;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    line-height: 0;
+    vertical-align: top;
+    outline: none;
+}
+
+
+/**
+ * mark：会员个人中心
+ * autho： LiuWei
+ * time: 2017/8/24
+ */
+//清除浮动
+@mixin clearfix{
+	&:after{
+		content: '';
+		display: block;
+		height: 0;
+		visibility: hidden;
+		clear: both;
+	}
+
+	zoom: 1;//兼容ie
+}
+
+i{
+	font-style: normal;
+}
+
+
+/* 会员个人信息 */
+.info-container{
+	position: relative;
+	//margin-top: 86px;
+	width: 1200px;
+	height: 286px;
+	background: #fff url('../images/vip/person-bg.jpg') top center no-repeat;
+	padding-top: 44px;
+	color: #fffbf9;
+	//margin-bottom: 30px;
+	margin: 86px auto 30px;
+	border-top: 1px solid #ebebeb;
+	box-sizing: border-box;
+	@include clearfix;
+	.avatar-wrap{
+		width: 100px;
+		height: 100px;
+		position: absolute;
+		border-radius: 50%;
+		box-shadow: 0 4px 4px 4px rgba(0,0,0,.1);
+		left: 124px;
+		top: -50px;
+		overflow: hidden;
+		background:#f7f7f7 url('../images/vip/placeholder.png') no-repeat center center;
+		background-size: cover;
+		>img{
+			width: 100%;
+		}
+	}
+	//左边信息
+	.info-left{
+		float: left;
+		width: 345px;
+		*width: 280px;
+		height: 164px;
+		border-right: 1px solid #ff964a;
+		box-sizing: border-box;
+		padding: 0 32px;
+		text-align: center;
+		position: relative;
+		.name{
+			font-size: 18px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			margin-top: 14px;			
+			.lv-icon{
+				display: inline-block;
+				width: 76px;
+				height: 16px;
+				// background: url('../images/vip/vip-icon.png') center no-repeat;
+				// background-position: -24px -117px;
+				vertical-align: top;
+				margin-top: 5px;
+				margin-right: 2px;
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+
+				// &.lv1{
+				// 	background-position: -24px -147px;
+				// }
+				// &.lv2{
+				// 	background-position: -24px -175px;
+				// }				
+				// &.lv3{
+				// 	background-position: -24px -203px;
+				// }
+
+			}
+		}
+		.val-wrap{
+			float: left;
+			width: 140px;
+			margin-top: 46px;
+			.title{
+				font-size: 14px;
+
+			}
+			.value{
+				font-size: 32px;
+				margin-top: 14px;
+				a{
+					color: #fff;
+				}
+				&:hover{
+					text-shadow: 0 0 32px #fff,0 0 20px #fff,0 0 40px #fff,0 0 50px #fff;//辉光效果
+				}
+			}
+/* 			&.grow{
+				.value{
+					text-shadow: 0 0 32px #fff;
+				}
+			} */
+		}
+		.w-line{
+			position: absolute;
+			width: 1px;
+			height: 100%;
+			background-color: #ffc296;
+			right: -2px;
+			top: 0;				
+		}		
+	}
+	//右边等级信息
+	.info-right{
+		float: left;
+		width: 694px;
+		height: 164px;
+		margin-left: 80px;
+		//padding: 0 80px;
+		position: relative;
+		.line{
+			position: absolute;
+			height: 1px;
+			width: 695px;
+			background-color: #ffc69d;
+			left: 0;
+			top: 50%;
+			z-index: 1;
+		}
+		//强调线
+		.st-line{
+			position: absolute;
+			height: 1px;
+			width: 0;
+			background-color: #fff;
+			box-shadow: 0 0 10px 1px #fff;
+			left: 0;
+			top: 50%;
+			z-index: 2;			
+		}
+		.lv-item{
+			position: absolute;
+			text-align: center;
+			z-index: 8;
+			top: 50px;
+			width: 108px;
+			cursor: pointer;
+			.icon-wrap{
+				width: 42px;
+				height: 52px;
+				display: inline-block;
+				position: relative;
+				.circle{
+					width: 42px;
+					height: 42px;
+					margin-top: 10px;
+					border-radius: 50%;
+					background-color: #ffc79e;
+				}
+				.lv-icon{
+					position: absolute;
+					width: 28px;
+					height: 42px;
+					left: 50%;
+					margin-left: -14px;
+					top: 4px;
+					//background: url('../images/vip/vip-icon.png') center no-repeat;
+	                background-position: center;
+	                background-size: 100%;
+	                background-repeat: no-repeat;				
+										
+				}
+			}
+			.lv-name{
+				margin-bottom: 6px;
+			}
+			&.lv0{
+				left: -14px;
+				.lv-icon{
+					top: 11px;
+				}
+				// .lv-icon{
+				// 	background-position: -16px -9px;
+				// }
+			}
+			&.lv1{
+				left: 134px;
+				// .lv-icon{
+				// 	background-position: -65px -9px;
+				// }
+			}
+			&.lv2{
+				left: 334px;
+				// .lv-icon{
+				// 	background-position: -112px -9px;
+				// }
+			}
+			&.lv3{
+				left: 598px;
+				// .lv-icon{
+				// 	background-position: -160px -9px;
+				// }
+			}
+
+			&.active{
+				color: #fff;
+				.lv-name{
+					font-size: 16px;
+					font-weight: bold; 
+				}
+				.circle{
+					background-color: #ffc69d;
+					box-shadow: 0 0 20px 3px #fff;
+				}
+			}			
+
+		}
+		
+		//浮标样式
+		.buoy{
+			width: 300px;
+			//color: #fff;
+			text-align: center;
+			position: absolute;
+			top: 0;
+			left: -110px;
+			z-index: 6;
+			.tip{
+				display: inline-block;
+				border: 1px solid #ffc69d;
+				height: 30px;
+				line-height: 30px;
+				padding: 0 20px;
+				border-radius: 10px;
+				font-size: 14px;
+				>i{
+					font-weight: bold;
+				}
+			}
+			.v-line{
+				margin: 0 auto;
+				width: 1px;
+				height: 42px;
+				background-color: #febfb4;
+				margin-top: 5px;
+			}
+			.max-circle{
+				margin: 0 auto;
+				width: 12px;
+				height: 12px;
+				//background-color: #febfb3;
+				background-color: #fff;
+				position: relative;
+				border-radius: 50%;
+				box-shadow: 0 0 10px 2px #fff;
+				.min-circle{
+					position: absolute;
+					left: 3px;
+					top: 3px;
+					width: 6px;
+					height: 6px;
+					background-color: #fff2f0;
+					border-radius: 50%;
+				}
+			}
+		}
+	}
+
+}

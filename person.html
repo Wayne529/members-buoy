@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>会员个人中心</title>
+	<link rel="stylesheet" href="css/person.css">
+</head>
+<body>
+	<!-- 个人信息 -->
+	<div class="info-container">
+		<div class="avatar-wrap">
+			<img src="images/vip/avatar.jpg" alt="">
+		</div>
+		<div class="info-left">
+			<div class="name"><span class="lv-icon" style="background-image: url('images/vip/lv1.png')"></span>陈一发儿</div>
+			<div class="val-wrap grow">
+				<p class="title">成长值</p>
+				<p class="value"><a href="http://www.juooo.com/">1202</a></p>
+			</div>
+			<div class="val-wrap  integral">
+				<p class="title">积分</p>
+				<p class="value"><a href="http://www.juooo.com/">999</a></p>				
+			</div>
+			<div class="w-line"></div>
+		</div>
+		<div class="info-right">
+			<div class="lv-item lv0">
+				<div class="icon-wrap">
+					<div class="lv-icon" style="background-image: url('images/vip/lv-icon0.png')"></div>
+					<div class="circle"></div>
+				</div>
+				<p class="lv-name">普通用户</p>
+				<p class="lv-grow">成长值0</p>				
+			</div>
+			<div class="lv-item lv1 active">
+				<div class="icon-wrap">
+					<div class="lv-icon" style="background-image: url('images/vip/lv-icon1.png')"></div>
+					<div class="circle"></div>
+				</div>
+				<p class="lv-name">V1青橙</p>
+				<p class="lv-grow">成长值50+</p>				
+			</div>	
+			<div class="lv-item lv2">
+				<div class="icon-wrap">
+					<div class="lv-icon" style="background-image: url('images/vip/lv-icon2.png')"></div>
+					<div class="circle"></div>
+				</div>
+				<p class="lv-name">V2黄橙</p>
+				<p class="lv-grow">成长值1000+</p>				
+			</div>	
+			<div class="lv-item lv3">
+				<div class="icon-wrap">
+					<div class="lv-icon" style="background-image: url('images/vip/lv-icon3.png')"></div>
+					<div class="circle"></div>
+				</div>
+				<p class="lv-name">V3红橙</p>
+				<p class="lv-grow">成长值2000+</p>				
+			</div>							
+			<div class="line"></div>
+			<div class="st-line"></div>
+			<!-- 指向块 -->
+			<div class="buoy">
+				<div class="tip">成长值<i>121</i>，还差951升级</div>
+				<div class="v-line"></div>
+				<div class="max-circle">
+					<!-- <div class="min-circle"></div> -->
+				</div>
+			</div>
+			<!-- 指向块end -->
+		</div>
+
+	</div>
+	<!-- 个人信息end -->
+
+
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		  /**
+		   * mark: 设置游标位置
+		   * time: 2017/8/25
+		   * author: LiuWei
+		   * growValue为成长值
+		   * @type {Array}
+		   */
+		   var growValueArr = [0,50,1000,2000];//成长值数组，读后台配置项
+		   var positionArr = [40,188,388,652];//会员勋章位置数组，以中心为基准
+		   //设置浮标位置的方法
+		   function setBuoyPosition(growValue){
+		   	  if(growValue >= growValueArr[growValueArr.length-1]){
+		   	  	//到达最大的时候
+		   	  //$('.buoy').css('left',positionArr[positionArr.length-1] - 150);//这里减去150px是由于浮标的宽度是300px，以中心为基准
+		   	  $('.buoy .tip').html('您已成为顶级会员');	
+		   	  $('.st-line').animate({'width':positionArr[positionArr.length-1]},600);  
+		   	  $('.buoy').animate({'left':positionArr[positionArr.length-1] - 150},600) 	  	
+		   	  	return false;
+		   	  }
+		   	  var theIndex = 0;
+		   	  for(var i=0;i<growValueArr.length;i++){
+		   	  	if(growValue>=growValueArr[i] && growValue<growValueArr[i+1]){
+		   	  		theIndex = i;
+		   	  		break;
+		   	  	}
+		   	  }
+		   	  console.log(theIndex);
+		   	  var percent = (growValue - growValueArr[theIndex])/(growValueArr[theIndex + 1] - growValueArr[theIndex]);//计算百分比
+		   	  var positionLeft = (positionArr[theIndex + 1] - positionArr[theIndex])*percent + positionArr[theIndex];//计算位置左偏移量
+		   	  //$('.buoy').css('left',positionLeft - 150);//这里减去150px是由于浮标的宽度是300px，以中心为基准
+		   	  //$('.st-line').css('width',positionLeft);
+		   	  $('.buoy').animate({'left':positionLeft - 150},600);
+		   	  $('.st-line').animate({'width':positionLeft},600);
+		   	  $('.buoy .tip').html('成长值<i>'+ growValue +'</i>，还差'+ (growValueArr[theIndex+1] - growValue) +'升级');
+		   	  $('.info-right .lv-item').eq(theIndex).addClass('active').siblings().removeClass('active');
+		   }
+
+		   setBuoyPosition(1202);		
+	})
+</script>
+
+</body>
+</html>
